@@ -19,14 +19,35 @@ class ViewController: UIViewController {
     }
 
     @IBAction func btnClicked(_ sender: Any) {
-        animation(show: !isActive)
+       // animation(show: !isActive)
+        springAnimation(show: !isActive)
     }
     private func animation(show: Bool) {
-        if show {
-            showAlert()
-        } else{
-            hideAlert()
+        UIView.animate(withDuration: 0.6) { [weak self] in
+            if show {
+                self?.showAlert()
+            } else{
+                self?.hideAlert()
+            }
+            self?.view.layoutIfNeeded()
         }
+    }
+    private func springAnimation(show: Bool){
+        UIView.animate(withDuration: 1,
+                       delay: 0,
+                       usingSpringWithDamping: 0.6,
+                       initialSpringVelocity: 0.4,
+                       options: .curveEaseIn) { [weak self] in
+            if show {
+                self?.showAlert()
+            } else{
+                self?.hideAlert()
+            }
+            self?.view.layoutIfNeeded()
+        } completion: { _ in
+            print("Spring Animation is Done")
+        }
+
     }
     private func hideAlert(){
         isActive = false
