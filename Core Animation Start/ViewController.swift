@@ -8,20 +8,21 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var alertViewTopConstraint: NSLayoutConstraint!
     var isActive = true
     override func viewDidLoad() {
         super.viewDidLoad()
         hideAlert()
-
+        
     }
-
+    
     @IBAction func btnClicked(_ sender: Any) {
-       // animation(show: !isActive)
+        // animation(show: !isActive)
         springAnimation(show: !isActive)
     }
+    //First Animation Style
     private func animation(show: Bool) {
         UIView.animate(withDuration: 0.6) { [weak self] in
             if show {
@@ -32,6 +33,7 @@ class ViewController: UIViewController {
             self?.view.layoutIfNeeded()
         }
     }
+    //Second animtion style
     private func springAnimation(show: Bool){
         UIView.animate(withDuration: 1,
                        delay: 0,
@@ -47,7 +49,7 @@ class ViewController: UIViewController {
         } completion: { _ in
             print("Spring Animation is Done")
         }
-
+        
     }
     private func hideAlert(){
         isActive = false
